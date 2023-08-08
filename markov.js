@@ -1,3 +1,4 @@
+"use strict";
 /** Textual markov chain generator. */
 
 
@@ -15,7 +16,7 @@ class MarkovMachine {
   /** Get markov chain: returns object of Markov chains.
    *
    *  For text of "The cat in the hat.", chains will be:
-   * 
+   *
    *  {
    *   "The": ["cat"],
    *   "cat": ["in"],
@@ -23,12 +24,38 @@ class MarkovMachine {
    *   "the": ["hat."],
    *   "hat.": [null],
    *  }
-   * 
+   *
    * */
 
   getChains() {
     // TODO: implement this!
-  }
+    // create an object
+    // loop through this.words, if word is in object then push the next word as value.
+    // if word is not in object, add it and assign value to array with next word value in it
+    // if it's the last word in this.words, set value to [null].
+    const chains = {};
+    const words = this.words;
+    const lastWordIdx = words.length-1;
+
+    for(let x = 0 ; x < (words.length-2); x++){
+      if(words[x] in chains){
+        chains[words[x]].push(words[x+1]);
+      } else {
+        chains[words[x]] = [words[x+1]];
+      }
+    }
+
+    if(words[lastWordIdx] in chains){
+      chains[words[lastWordIdx]].push(null);
+    } else {
+      chains[words[lastWordIdx]] = [null];
+    }
+
+    return chains;
+    }
+
+
+
 
 
   /** Return random text from chains, starting at the first word and continuing
@@ -42,3 +69,8 @@ class MarkovMachine {
     // - repeat until reaching the terminal null
   }
 }
+
+
+  // loop through words and make object - check if key is in object and if so
+    // add next word to the value array. if not key in obj yet, set that key's
+    // value to array w subsequent word in it.
