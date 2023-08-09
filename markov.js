@@ -35,24 +35,24 @@ class MarkovMachine {
     // if it's the last word in this.words, set value to [null].
     const chains = {};
     const words = this.words;
-    const lastWordIdx = words.length-1;
+    const lastWordIdx = words.length - 1;
 
-    for(let x = 0 ; x < (words.length-2); x++){
-      if(words[x] in chains){
-        chains[words[x]].push(words[x+1]);
+    for (let x = 0; x < (words.length - 1); x++) {
+      if (words[x] in chains) {
+        chains[words[x]].push(words[x + 1]);
       } else {
-        chains[words[x]] = [words[x+1]];
+        chains[words[x]] = [words[x + 1]];
       }
     }
 
-    if(words[lastWordIdx] in chains){
+    if (words[lastWordIdx] in chains) {
       chains[words[lastWordIdx]].push(null);
     } else {
       chains[words[lastWordIdx]] = [null];
     }
 
     return chains;
-    }
+  }
 
 
 
@@ -67,10 +67,22 @@ class MarkovMachine {
     // - start at the first word in the input text
     // - find a random word from the following-words of that
     // - repeat until reaching the terminal null
+    const newStoryArr = [];
+
+
+    let currWord = this.words[0];
+
+    while (currWord !== null) {
+      newStoryArr.push(currWord);
+      const randIndex = Math.floor(Math.random() * (this.chains[currWord].length));
+      currWord = this.chains[currWord][randIndex];
+    }
+
+
+    return newStoryArr.join(" ");
   }
 }
 
+let marky = new MarkovMachine("I am very good lots of text and some texts.");
 
-  // loop through words and make object - check if key is in object and if so
-    // add next word to the value array. if not key in obj yet, set that key's
-    // value to array w subsequent word in it.
+module.exports = { MarkovMachine, };
