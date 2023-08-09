@@ -28,7 +28,13 @@ async function makeText() {
 
   let path = process.argv[3];
 
-  let resultPromise = process.argv[2] === "file" ? await readFile(path) : await readUrl(path);
+  if (process.argv[2] !== "file" && process.argv[2] !== "url") {
+    console.log(`Unknown method: ${process.argv[2]}`);
+    process.exit(1);
+  }
+
+  let resultPromise = process.argv[2] === "file" ?
+    await readFile(path) : await readUrl(path);
 
   const newStory = new MarkovMachine(resultPromise);
 
