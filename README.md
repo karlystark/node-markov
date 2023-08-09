@@ -2,4 +2,10 @@
 
 Markov Machine created in Rithm32 -
 
-Generates realistic machine-made text from an original source text :)
+From command-line, accepts file path or url txt path:
+
+$ node makeText.js file eggs.txt
+... generated text from file 'eggs.txt' ...
+
+$ node makeText.js url http://www.gutenberg.org/files/11/11-0.txt
+... generated text from that URL ...
