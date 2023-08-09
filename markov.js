@@ -1,6 +1,6 @@
 "use strict";
 /** Textual markov chain generator. */
-
+//const { readFile } = require('./makeText.js');
 
 class MarkovMachine {
 
@@ -67,10 +67,9 @@ class MarkovMachine {
       currWord = this.chains[currWord][randIndex];
     }
 
-    return newStoryArr.join(" ");
+    console.log(newStoryArr.join(" "));
   }
 }
 
-let marky = new MarkovMachine("I am very good lots of text and some texts.");
 
 module.exports = { MarkovMachine, };
