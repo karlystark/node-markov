@@ -28,11 +28,6 @@ class MarkovMachine {
    * */
 
   getChains() {
-    // TODO: implement this!
-    // create an object
-    // loop through this.words, if word is in object then push the next word as value.
-    // if word is not in object, add it and assign value to array with next word value in it
-    // if it's the last word in this.words, set value to [null].
     const chains = {};
     const words = this.words;
     const lastWordIdx = words.length - 1;
@@ -62,13 +57,7 @@ class MarkovMachine {
    *  until it hits a null choice. */
 
   getText() {
-    // TODO: implement this!
-
-    // - start at the first word in the input text
-    // - find a random word from the following-words of that
-    // - repeat until reaching the terminal null
     const newStoryArr = [];
-
 
     let currWord = this.words[0];
 
@@ -77,7 +66,6 @@ class MarkovMachine {
       const randIndex = Math.floor(Math.random() * (this.chains[currWord].length));
       currWord = this.chains[currWord][randIndex];
     }
-
 
     return newStoryArr.join(" ");
   }
